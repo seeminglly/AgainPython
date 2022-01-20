@@ -1,0 +1,24 @@
+### 딕셔너리(dictionary): key - value
+
+- 딕셔너리는 key를 통해 value를 얻음(순차적으로 해당 요솟값 검색x)
+    
+    > {key1:value1, key2:value2, key3:value3,...}*key에는 변하지 X 값, value는 모든 값 사용 가능
+    > 
+- 딕셔너리 쌍 추가, 삭제
+    
+    > <추가>a['key'] = 'value'딕셔너리 제일 마지막에 추가됨<삭제>del a['key']key와 해당 value 한 쌍이 삭제됨
+    > 
+- dictionary에서 값을 얻는 방법
+    
+    > key를 사용해 value 얻기인덱싱이나 슬라이싱X
+    > 
+- 주의사항
+1. 중복되는 key를 사용할 경우, 하나를 제외한 나머지 모두 무시(제일 마지막 것만 적용됨)
+2. key에는 리스트 사용X (리스트는 변하는 값이기 때문, 따라서 key에 튜플 사용은 가능하다)
+- 딕셔너리 관련 함수
+1. key 리스트: .keys()
+2. value 리스트: .values()
+3. key:value쌍 리스트: .items()> 이러한 dict_ 객체들을 리스트로 변환하려면 list(a.keys()), list(a.items())...
+4. key:value 모두 지우기: .clear()
+5. key로 value 얻기: .get('key')> a['key']와 다른 점: 없는 key를 불렀을 때 a['key']는 오류를, get은 None을 내보냄> 또한 get은 딕셔너리 안에 찾으려는 Key가 없을 경우, 디폴트값을 대신 가져오게 할 수 있음(.get('key','value')
+6. 해당 key가 있는지 조사: 'key' in 'dict'
