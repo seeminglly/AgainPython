@@ -1,0 +1,3 @@
+### 불(Bool): 참(True) or 거짓(False)
+
+- 자료형의 참과 거짓(),[],"",{} 등 값이 비어있으면 False0, None 이면 False값이 있다면 True
