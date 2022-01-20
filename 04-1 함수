@@ -67,8 +67,7 @@ key = value의 형태의 결괏값이 그 딕셔너리에 저장됨.
 ```
 
 ### 함수의 결괏값은 언제나 하나!
-
-https://github.com/seeminglly/AgainPython/issues/1#issue-1108894715
+![2560C24A5209AC1910](https://user-images.githubusercontent.com/80025304/150282018-ab493122-de09-4713-8e9f-d228e63efbfb.jpeg)
 
 ```python
 def add_mul(a,b):
