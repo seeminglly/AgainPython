@@ -1,0 +1,95 @@
+- 문자열(string): 문자, 단어 등으로 구성된 문자들의 집합문자열
+- 문자열 만들기0.큰따옴표(" ")1.작은따옴표(' ')2.큰따옴표를 연속으로 3개(""" """)3.작은따옴표 연속으로 3개(''' ''')
+- 문자열 안에 큰따옴표나 작은따옴표 포함시킬 때\' , \"
+- 여러 줄인 문자열을 변수에 대입하고 싶을 때
+1. 줄바꿈문자 \n
+2. 연속된 작따''' 또는 큰따""" 사용하기ex)a = '''life is too shortyou need python'''
+- 문자열 연산
+1. 더하기 +
+2. 곱하기 *
+- 문자열 길이 구하기
+- len함수
+- 인덱싱: 가리킨다슬라이싱: 잘라낸다
+- 문자열 포맷팅!!> 특정한 값만 바꿔야하는 경으
+1. 숫자 대입
+    
+    > "I eat %d apples." %3'I eat 3 apples.'
+    > 
+2. 문자열 대입
+    
+    > "I eat %s apples." %three'I eat three apples.'
+    > 
+3. 숫자값을 니티내는 변수로 대입
+    
+    > number = 3"I eat %d apples." %number'I eat 3 apples.'
+    > 
+4. 2개 이상의 값 넣기
+    
+    > number = 10day = "three""I ate %d apples. so i was sick for %s days." %(number, day)'I ate 10 apples. so i was sick for three days.'
+    > 
+- 문자열 포맷 코드%s: string%c: 문자 1개(character)%d: 정수(integer)%f:부동소수(floating point)%o:8진수%x:16진수%%:Literal(문자'%'자체)> %s는 자동으로 뒤에 오는 값을 문자열로 바꿔줌
+- 포맷코드와 숫자 함께 사용하기
+1. 정렬과 공백
+    
+    > "%10s" %"hi"' hi'"%-10s" %"hi"'hi '
+    > 
+2. 소수점 표현하기
+    
+    > "%0.4f"%3.42134234'3.4213'"%10.4f" %3.4213423' 3.4213'
+    > 
+- format함수를 이용한 포매팅
+1. 숫자 바로 대입
+    
+    > "I eat {0} apples." format(3)'I eat 3 apples.'
+    > 
+2. 문자열 바로 대입
+    
+    > "I eat {0} apples. format(five)'I eat five apples.'
+    > 
+3. 숫자값을 가진 변수로 대입
+    
+    > number=3"I eat {0} apples." format(number)'I eat 3 apples.'
+    > 
+4. 2개 이상 값 넣기
+    
+    > number = 10day = "three""I ate {0} apples. so i was sick for {1} days." format(number, day)'I ate 10 apples. so i was sick for three days.'
+    > 
+5. 이름으로 넣기
+    
+    > "I ate {number} apples. so i was sick for {day} days." format(number=10, day=3)'I ate 10 apples. so i was sick for 3 days.'
+    > 
+6. 인덱스+이름 혼용
+    
+    > "I ate {0} apples. so i was sick for {day} days." format(10, day=3)
+    > 
+7. 왼쪽 정렬
+    
+    > "{0:<10}".format("hi")'hi ' (총 길이 10)
+    > 
+8. 오른쪽 정렬
+    
+    > "{:>10}".format("hi")' hi'
+    > 
+9. 가운데 정렬
+    
+    > "{:^10}".format("hi")' hi '
+    > 
+10. 공백 채우기
+    
+    > "{:=^10}".format("hi")'====hi===='
+    > 
+11. 소수점 표현
+    
+    > y = 3.42134234"{:0.4f}".format(y)'3.4213'"{:10.4f}".format(y)' 3.4213'
+    > 
+12. { or } 표현
+    
+    > "{{ and }}.format()'{ and }
+    > 
+- f문자열 포매팅문자열 앞에 f를 붙이면 f문자열 포매팅 가능(파이썬 3.6버전 이상)
+    
+    > name = 'kang semin'age = 21f'나의 이름은 {name} 입니다. 나이는 {age} 입니다.''나의 이름은 kang semin 입니다. 나이는 21 입니다.'-> name,age 같이 변수값을 생성한 후에 그 값을 참조하여 사용할 수 있음.
+    > 
+
+> age = 21f'나는 내년이면 {age+1}살이 된다.''나는 내년이면 22살이 된다.'
+>
