@@ -1,0 +1,99 @@
+### 자주 발생하는 오류
+
+FileNotFoundError: 없는 파일 열려고 시도할 때
+
+ZeroDivisionError: 0으로 다른 숫자를 나누는 경우
+
+IndexError
+
+### 오류 예외 처리 기법
+
+예외적으로 오류를 처리하고 싶을 때 사용 
+
+1. try,except문
+
+```python
+try:
+...
+except [발생오류[as 오류 메세지 변수]]:
+...
+```
+
+try블록 수행 중 오류가 발생하면 except블록이 수행됨
+
+- except 구문
+
+>>> except [발생오류[as 오류 메세지 변수]]:
+
+여기서 []기호는 괄호 안의 내용을 생략할 수 있다는 관례 표기법임 따라서 except 구문은 3가지 방법으로 사용 O
+
+-try, except만 쓰는 방법: 오류 종류 상관없이 오류가 발생하면 except블록 실행
+
+-발생오류만 포함한 except문: 미리 정해놓은 오류 이름과 일치한 오류가 발생한 경우에만 except블록 실행
+
+-발생오류+오류메세지 변수 포함한 except문: 두번째 경우에서 오류메세지의 내용까지 알고 싶은 경우
+
+1. try ... finally문
+
+```python
+f = open("foo.txt",'w')
+try:
+	#실행문
+finally:
+	f.close()
+```
+
+try문에서 예외 발생 여부와 상관없이 finally문의 f.close()가 실행됨
+
+### 여러 개의 오류 처리하기
+
+```python
+try:
+	...
+except 발생오류1:
+	...
+except 발생오류2:
+	...
+```
+
+또는 
+
+```python
+try:
+	...
+except 발생오류1 as e:
+	print(e)
+except 발생오류2 as e:
+	print(e)
+```
+
+```python
+#2개 이상의 오류를 동시처리하기 위해서는 괄호로 묶어서 함께 처리할 수 있음
+try:
+	...
+except (발생오류1, 발생오류2) as e:
+print(e)
+```
+
+### 오류 회피하기
+
+오류가 발생해도 그냥 통과시켜야 할 경우 → pass 사용
+
+### 오류 일부러 발생시키기
+
+종종 일부러 오류를 발생시켜야 할 경우 → raise 명령어 사용
+
+```python
+class Bird:
+	def fly(self):
+		raise NotImplementedError
+```
+
+### 예외 만들기(수정)
+
+특수한 경우에만 예외 처리를 하기 위해 종종 예외를 만들어서 사용함 → 파이썬 내장 클래스 Exception 사용
+
+교재 코드 따라하는데 자꾸 원하는 결과가 안 나오고 이상한 에러 뜸.. why.....
+
+SyntaxError: Non-ASCII character '\xeb' in file /Users/seeminglly/Desktop/test.py on line 4, but no encoding declared; see [http://python.org/dev/peps/pep-0263/](http://python.org/dev/peps/pep-0263/) for details
+(base) seeminglly@seeminglly-mac ~ %
