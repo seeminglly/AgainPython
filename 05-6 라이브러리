@@ -1,0 +1,258 @@
+## Library
+
+파이썬 사용자들이 만든 유용한 프로그램을 모아 놓은 것
+
+라이브러리 전부를 알 필요는 없지만 어떤 일을 할 때 어떤 라이브러리를 사용해야 한다는 정도만 알아도 ㄱㅊ
+
+- sys모듈: 파이썬 인터프리터가 제공하는 변수와 함수를 직접 제어할 수 있게 해줌
+- pickle모듈: 객체 형태를 그대로 유지하면서 파일에 저장(dump)하고 불러올 수 있게(pickle.load)함
+    - 사용 예시
+        - pickle모듈의 dump함수를 이용하여 딕셔너리 객체인 data를 파일에 저장
+        
+        ```python
+        import pickle
+        f = open("test.txt",'wb')
+        data = {'1':'python', '2':'you need'}
+        pickle.dump(data,f)
+        f.close()
+        ```
+        
+        - pickle모듈의 pickle.load를 사용하여 딕셔너리 객체 그대로를 불러오기
+        
+        ```python
+        import pickle
+        f = open("test.txt",'rb')
+        data = pickle.load(f)
+        print(data)
+        '{1:'python', 2:'you need'}'
+        ```
+        
+        딕셔너리 말고도 어떠한 자료형이든 저장/불러오기 가능
+        
+- OS모듈: 환경변수나 디렉터리, 파일 등의 OS자원을 제어할 수 있게 함
+    - 여러 함수
+        - os.environ: 시스템 환경변수값 알고 싶을 때 → 딕셔너리 객체로 돌려줌
+        - os.chdir: 디렉터리 위치 변경
+        - os.getcwd: 현재 자신의 디렉터리 위치 돌려줌
+        - os.system: 시스템 명령어 호출
+        - os.popen: 실행한 시스템 명령어의 결괏값 돌려받기
+        - os.mkdir: 디렉터리 생성
+        - os.rmdir: 디렉터리 삭제(단, 디렉터리가 비어있어야함)
+        - os.unlink: 파일 지움
+        - os.rename(src, dst): src라는 이름의 파일을 dst라는 이름으로 바꿈
+- shutil모듈: 파일 복사
+    - 예시
+        
+        ```python
+        import shutil
+        shutil.copy("src.txt","dst.txt")
+        -> src라는 이름의 파일을 dst로 복사
+        ```
+        
+- glob모듈: 특정 디렉토리에 있는 파일이름 모두를 알고 싶은 경우
+    - 사용 예시
+        
+        ```python
+        import glob
+        glob.glob("desktop/mark")
+        #desktop에 있는 파일 중 이름이 mark로 시작하는 파일을 모두 찾아 읽는 예
+        ```
+        
+- tempfile모듈: 파일을 임시로 만들어서 사용할 때
+    - 사용 예시
+        
+        ```python
+        import tempfile
+        filename = tempfile.mkstemp()
+        
+        $ tempfile.mkstemp()는 중복되지 않는 임시 파일의 이름을 무작위로 만들어서 돌려줌
+        ```
+        
+        ```python
+        import tempfile
+        f = tempfile.TemporaryFile() 
+        #tempfile.TemporaryFile()은 임시저장공간으로 사용할 파일 객체를 돌려줌
+        f.close() #f.close()가 호출되면 이 파일 객체는 자동으로 삭제됨
+        ```
+        
+- time모듈
+    - time.time()
+        
+        UTC(universal time coordinated)를 통해 현재 시간을 실수 형태로 돌려줌.
+        
+        1970년 1월 1일 0시 0분 0초를 기준으로 지난 시간을 초 단위로 돌려줌.
+        
+    - time.localtime
+        
+        time.time()이 돌려준 값을 사용해서 연도, 월, 일, 시,분,초,..의 형태로 바꿔줌
+        
+        ```python
+        import time
+        time.localtime(time.time())
+        
+        'time.struct_time(tm_year=2022, tm_mon=1, tm_mday=25, tm_hour=19, tm_min=28, 
+        tm_sec=19, tm_wday=1, tm_yday=25, tm_isdst=0)'
+        ```
+        
+    - time.asctime
+        
+        time.localtime에 의해 반환된 튜플형태의 값을 인수로 받아 날짜와 시간을 알아보기 쉬운 형태로 돌려줌
+        
+        ```python
+        import time
+        time.asctime(time.localtime(time.time()))
+        
+        'Tue Jan 25 19:30:12 2022'
+        ```
+        
+        - time.ctime
+            
+            time.asctime(time.localtime(time.time())) = time.ctime()
+            
+            asctime과 다른 점은 항상 >현재<시간만 돌려준다는 것
+            
+    - time.strftime
+        
+        time.strftime(’출력할 형식포맷코드’, time.localtime(time.time()))
+        
+        포맷코드
+        
+        1. %a: 요일 줄임말(Mon)
+        2. %A: 요일(Monday)
+        3. %b: 달 줄임말(Jan)
+        4. %B(January)
+        
+        등등 개많음 나머지는 아래 링크 참고
+        
+        [표준 날짜 및 시간 서식 문자열](https://docs.microsoft.com/ko-kr/dotnet/standard/base-types/standard-date-and-time-format-strings)
+        
+    - time.sleep
+        
+        주로 루프 안에서 많이 사용함
+        
+        일정한 시간 간격을 두고 루프 실행 가능
+        
+        ```python
+        import time
+        	for i in range(10):
+        		print(i)
+        		time.sleep(1) #0부터 9까지 1초 간격으로 값을 출력함
+        ```
+        
+- calendar모듈: 달력 볼 수 있게 해줌
+    - calendar.calendar(연도) or calendar.prcal(연도): 해당 연도의 전체 달력
+        
+        또는 calendar.prmonth(연도, 달)
+        
+        ```python
+        import calendar
+        print(calendar.calendar(2022))
+        
+        >>>2022
+        
+              January                   February                   March
+        Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
+                        1  2          1  2  3  4  5  6          1  2  3  4  5  6
+         3  4  5  6  7  8  9       7  8  9 10 11 12 13       7  8  9 10 11 12 13
+        10 11 12 13 14 15 16      14 15 16 17 18 19 20      14 15 16 17 18 19 20
+        17 18 19 20 21 22 23      21 22 23 24 25 26 27      21 22 23 24 25 26 27
+        24 25 26 27 28 29 30      28                        28 29 30 31
+        31
+        
+               April                      May                       June
+        Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
+                     1  2  3                         1             1  2  3  4  5
+         4  5  6  7  8  9 10       2  3  4  5  6  7  8       6  7  8  9 10 11 12
+        11 12 13 14 15 16 17       9 10 11 12 13 14 15      13 14 15 16 17 18 19
+        18 19 20 21 22 23 24      16 17 18 19 20 21 22      20 21 22 23 24 25 26
+        25 26 27 28 29 30         23 24 25 26 27 28 29      27 28 29 30
+                                  30 31
+        
+                July                     August                  September
+        Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
+                     1  2  3       1  2  3  4  5  6  7                1  2  3  4
+         4  5  6  7  8  9 10       8  9 10 11 12 13 14       5  6  7  8  9 10 11
+        11 12 13 14 15 16 17      15 16 17 18 19 20 21      12 13 14 15 16 17 18
+        18 19 20 21 22 23 24      22 23 24 25 26 27 28      19 20 21 22 23 24 25
+        25 26 27 28 29 30 31      29 30 31                  26 27 28 29 30
+        
+              October                   November                  December
+        Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
+                        1  2          1  2  3  4  5  6                1  2  3  4
+         3  4  5  6  7  8  9       7  8  9 10 11 12 13       5  6  7  8  9 10 11
+        10 11 12 13 14 15 16      14 15 16 17 18 19 20      12 13 14 15 16 17 18
+        17 18 19 20 21 22 23      21 22 23 24 25 26 27      19 20 21 22 23 24 25
+        24 25 26 27 28 29 30      28 29 30                  26 27 28 29 30 31
+        31
+        ```
+        
+    - calendar.weekday(연도, 월, 일): 그 날짜에 해당하는 요일 정보 돌려줌
+        
+        월: 0, 화: 1, 수: 2, 목: 3, 금: 4, 토: 5, 일: 6 이라는 값 돌려줌
+        
+        ```python
+        import calendar
+        calendar.weekday(2022,7,18)
+        '0'
+        오옹 올해 내 생일 월요일이구만..
+        ```
+        
+    - calendar.monthrange(연도,월): 입력받은 달의 1일이 무슨 요일인지 + 그 달이 며칠까지 있는지 튜플형태로 돌려줌
+- random모듈: 난수 발생시킴
+    - random.random()
+        
+        : 0부터 1.0사이의 실수 중에서 난수 값 돌려줌
+        
+    - random.randint(a, b)
+        
+        a와 b 사이의 정수 중에서 난수 값 돌려줌
+        
+    - random.choice(a)
+        
+        입력받은 리스트 a에서 무작위로 하나를 선택하여 돌려줌
+        
+    - random.shuffle(a)
+        
+        리스트a의 항목을 무작위로 섞어줌
+        
+    - radom모듈로 만든 함수 예시
+        
+        ```python
+        import random
+        
+        def random_pop(data):
+            number = random.randint(0,len(data)-1)
+            return data.pop(number)
+        
+        if __name__ == "__main__":
+            data = [1,2,3,4,5]
+            while data: print(random_pop(data))
+        
+        # random_pop이라는 함수 만듦
+        # random_pop함수는 data를 인수로 받음
+        # number는 0부터 입력받는 data 길이의 -1 사이 중에서 난수를 돌려받음 -> 그니까 총 갯수는 len(data)-1개의 인자를 받는거임
+        # data의 number를 돌려주고 리스트에서 pop(삭제)함
+        
+        # 리스트 형태로 data를 입력받음
+        # data가 True일 동안에, random_pop 함수를 실행해서 출력함
+        
+        >>> 결과: 랜덤으로 리스트의 숫자가 하나씩 pop되어서 출력됨
+        ```
+        
+- webbrowser모듈: 기본 웹브라우저를 자동으로 실행하는 모듈
+    - open_new함수
+        
+        이미 웹브라우저가 실행된 상태이더라도 새로운 창으로 해당 주소가 열리게 함
+        
+        >>> webbrowser.open_new(”http://google.com”)
+        
+    - 사용 예시
+        
+        다음 예는 웹브라우저를 자동으로 실행하고 해당 URL(구글)로 가게 해줌
+        
+        ```python
+        import webbrowser
+        webbrowser.open("http://google.com")
+        ```
+        
+    - webbrowser.open과 webbrowser.open_new의 차이점: open은 이미 웹브라우저가 실행된 상태라면 입력주소로 이동만 함(새로운 창 X), open_new는 새로운 창O
